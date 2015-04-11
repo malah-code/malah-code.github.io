@@ -1,0 +1,26 @@
+﻿.contentLower
+{
+    direction: rtl;
+}
+.contentLower h3
+{
+    text-align: right;
+}
+.thedescription124
+{
+    padding-top: 8px;
+}
+
+.contentUpperRight
+{
+    direction: rtl;
+}
+.contentlower img
+{
+    max-width: 63px !important;
+}
+#content
+{
+    width: 291px !important;
+}
+ 

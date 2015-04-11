@@ -1,0 +1,361 @@
+﻿#mainImage
+{
+max-height: 33px; 
+}
+.floatleft
+{
+    float: left;
+}
+.floatright
+{
+    float: right;
+}
+
+#accordion a
+{
+    font-family: Tahoma !important;
+    font-size: 12px;
+    border: 0px;
+    font-weight: bold;
+}
+#accordion div
+{
+    font-family: Tahoma !important;
+    font-size: 12px;
+    border: 0px;
+}
+#accordion img
+{
+    float: right;
+    padding: 9px;
+    border: 0px;
+}
+.thedescription124
+{
+    height: 100px;
+}
+.thedescription124 img
+{
+    padding-left: 5px;
+    padding-right: 5px;
+    max-height: 70px;
+    max-width: 120px;
+}
+.aBolder
+{
+    font-weight: bolder;
+    color: Blue;
+    float: right;
+}
+.LastUpdatedDateItem
+{
+ display:none;
+    font-family: Tahoma !important;
+font-size: 10px !important;
+width: 230px;
+text-align: center;
+margin: auto;
+margin-right: auto;
+margin-bottom: auto;
+margin-left: auto;
+margin-top: 5px;
+}
+.overTheSocialWhite{width: 95.5%;
+background: white;
+height: 22px;
+position: absolute;}
+.LastUpdatedDate
+{
+    font-family: Tahoma !important;
+    font-size: 9px !important;
+    width: 100%;
+    background: #E5E5E5;
+}
+.allInfoRight
+{
+    float: left;
+}
+.divMainHolder
+{
+    width: 550px;
+    padding: 0px;
+    font-family: Tahoma;
+}
+
+
+#allInfo
+{
+    margin: 0px;
+    font-family: tahoma;
+    font-weight: normal;
+    font-size: 14px;
+}
+.allInfoDivMain
+{
+    text-align: left;
+}
+
+#feed
+{
+    
+    position: relative;
+    left: -6px;
+    width: 570px;
+}
+
+.ui-tabs .ui-tabs-panel
+{
+    padding: 2px 2px;
+}
+
+
+.ui-accordion-header a
+{
+    font-weight: bolder !important;
+}
+
+.mainTabDiv
+{
+    height: 450px;
+    overflow: auto;
+    width: 560px;
+}
+form
+{
+    padding: 0px;
+    margin: 0px;
+}
+#feedmoreinfo {
+
+    height: 34px;
+    position: relative;
+    left: -6px;
+    width: 570px;
+    overflow: hidden;
+    margin-top: 4px;
+    font: normal 11px arial, serif;
+}
+#feedmoreInfo .mainfeedmoreinfoDiv a
+{
+    color: #2251A6;
+}
+#link-options {
+    background: url("images/options.png") no-repeat center left;
+    padding-left: 17px;
+    overflow: visible;
+}.OptionsDiv
+{
+    margin-top:10px;
+    margin-left:5px;width: 69px;
+    float:left;
+}
+#link-nicewebtools {
+    
+    padding-left: 16px;
+    overflow: visible;
+}
+.nicewebtoolsDiv
+{
+    margin-top:10px;background: url("images/nicewebtools.png") no-repeat center left;
+    float:right;width: 169px;
+}
+#link-buyme {
+    
+    padding-left: 27px;
+    overflow: visible;
+}
+.buymediv {
+    margin-top: 0.9px;
+    background: url("cssImages/icon-feedback-16.png") no-repeat center left;
+    float: left;
+    width: 182px;
+    height: 21px;
+    padding-top: 10px;
+    padding-left: 19px;
+}
+.searchDiv input
+{
+    border: 0px;
+    margin: 5px;
+    width: 179px;
+}
+.searchDiv button
+{
+    margin-left: 21px;
+    width: 52px;
+    opacity: 0.1;
+}
+.searchDiv
+{
+    margin-top: 9px;
+    margin-right: -11px;
+    width:268px;
+    height:27px;
+    background: url("images/new-google-search.png") no-repeat center left;
+}
+.ui-accordion .ui-accordion-content {
+    padding: 0.3em 1em !important;
+}
+
+.popItemContent
+{
+    height: 73px;
+}
+
+h3.ui-state-active{
+background: #EED !important;
+}
+
+.popItemContent img{
+    cursor: pointer;
+}
+
+ /*///////////////*//*SocialLinks*/ /*///////////////*/
+.socialbuuttons
+{
+    border: 1px solid #B9C7D3;
+    clear: both;
+    height: 24px;
+    width: 100%;
+    padding: 0px;
+    font-family: verdana;
+    font-size: 12px;
+    margin-bottom: 0px;
+    margin-left: -2px;
+    /*background-color: #F7F7F7;*/
+   
+    padding-left: 2px
+}
+.aReadMore
+{
+    font-size: 12px;
+font-weight: bold;}
+.facebookClassMain
+{
+    width: 47px;
+    overflow: hidden;
+    margin-top: 2px;
+}
+.plusClassMain
+{
+    width: 85px;
+    overflow: hidden;
+    padding-top: 5.5px;
+}
+.addthisClassMain
+{
+    width: 42px;
+    padding-top: 5px;
+}
+.smallImageDivMain
+{
+    padding-top: 1px;
+    font-size: 9px !important;
+    margin-right: 4px;
+    overflow: hidden;
+}
+.socialBuuttons div
+{
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
+.stButton .twitter
+{
+    background: url('cssImages/service-icons-sprite.png') no-repeat 0 -620px !important;
+    width: 16px;
+    height: 16px;
+}
+.stButton .facebook
+{
+    background: url('cssImages/service-icons-sprite.png') no-repeat 0 -181px !important;
+    width: 16px;
+    height: 16px;
+}
+.stButton .twitter:hover
+{
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+.stButton .facebook:hover
+{
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+.stButton .chicklets
+{
+    background: url("cssImages/service-icons-sprite.png") no-repeat scroll right top transparent;
+    padding-left: 20px;
+    padding-right: 3px;
+    white-space: nowrap;
+    font-family: Verdana,Helvetica,sans-serif;
+    font-size: 11px;
+    display: inline-block;
+    height: 16px;
+    line-height: 16px;
+}
+
+.stButton
+{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    display: inline-block;
+    cursor: pointer;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 16px;
+    overflow: hidden;
+}
+    
+.expandedPreview
+{
+    width: 37px;
+    float: left;
+    margin-top: 4px;
+    margin-right: 3px;
+}
+
+.st_facebook
+{
+    margin-right: 4px;
+}
+/*///////////////*//*SocialLinks*/ /*///////////////*/
+
+
+
+/*scroll bar for safari & chrome*/
+
+::-webkit-scrollbar {
+
+width: 12px;
+
+height: 10px;
+
+}
+
+::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment
+{
+    height: 1px;
+    display: block;
+    background-color: #E5E5E5;
+}
+
+::-webkit-scrollbar-button:horizontal:start:decrement, ::-webkit-scrollbar-button:horizontal:end:increment
+{
+    height: 1px;
+    display: block;
+    background-color: #E5E5E5;
+}
+
+::-webkit-scrollbar-track-piece {
+
+background-color: #E5E5E5;
+
+}
+
+::-webkit-scrollbar-thumb:vertical, ::-webkit-scrollbar-thumb:horizontal
+{
+    background-color: #B9B9B9;
+    border: 1px solid #8B8B8B;
+    -webkit-border-radius: 6px;
+}

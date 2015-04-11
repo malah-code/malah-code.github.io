@@ -1,0 +1,240 @@
+﻿#content
+{
+    height: 137px;
+    width: 290px;
+    overflow: hidden;
+    padding: 3px;
+}
+.contentUpper
+{
+    border: 1px solid #B9C7D3;
+    clear: both;
+    height: 15px;
+    width: 288px;
+    padding: 1.5px;
+    font-family: verdana;
+    font-size: 12px;
+    margin-bottom: 2px;
+}
+.contentUpper a, .contentUppe img
+{
+    border: 0px;
+}
+.contentUpperRight
+{
+    float: left;
+}
+.contentUpperLeft
+{
+    float: right;
+    font-size: 0px;
+}
+.contentLower
+{
+    border: 1px solid #B9C7D3;
+    width: 288px;
+    padding: 1.5px;
+    font-family: verdana;
+    font-size: 12px;
+    height: 85px;
+    overflow:hidden;
+}
+.contentLower h3
+{
+    font-size: 12px;
+    text-decoration: none;
+    margin-left: 0px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    margin-top: 2px;
+    padding-right: 4px;
+    padding-left: 4px;
+}
+body
+{
+    padding: 0px;
+    margin: 0px;
+}
+.hideThis
+{
+    display: none;
+}
+.contentLower a
+{
+    font-family: Tahoma !important;
+    font-size: 12px;
+    border: 0px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.contentLower div
+{
+    font-family: Tahoma !important;
+    font-size: 11px;
+    border: 0px;
+}
+.contentLower img
+{
+    float: right;
+    padding-left: 9px;
+    border: 0px;
+    max-width: 50px;
+    padding-right: 4px;
+    padding-top: 0px;
+    padding-bottom: 4px;
+}
+.thedescription124
+{
+    height: 65px;
+}
+.thedescription124 a
+{
+    font-size: 8px;
+}
+.aBolder
+{
+    font-weight: bolder;
+    color: Blue;
+    float: right;
+}
+.LastUpdatedDateItem
+{
+    font-family: Tahoma !important;
+    font-size: 9px !important;
+    width: 100%;
+}
+.LastUpdatedDate
+{
+    font-family: Tahoma !important;
+    font-size: 9px !important;
+    width: 100%;
+    background: #E5E5E5;
+}
+.allInfoRight
+{
+    float: left;
+}
+.divMainHolder
+{
+    width: 550px;
+    padding: 5px;
+    font-family: Tahoma;
+}
+.opacity4
+{
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+}
+.floatleft
+{
+    float: left;
+}
+.floatright
+{
+    float: right;
+}
+.socialbuuttons
+{
+    border: 1px solid #B9C7D3;
+    clear: both;
+    height: 24px;
+    width: 285px;
+    padding: 0px;
+    font-family: verdana;
+    font-size: 12px;
+    margin-bottom: 0px;
+    margin-left: 2px;
+    position: absolute;
+    left: 1px;
+    background-color: #F7F7F7;
+    margin-top: 2px;
+    padding-left: 6px;
+}
+.facebookClassMain
+{
+    width: 47px;
+    overflow: hidden;
+    margin-top: 2px;
+}
+.plusClassMain
+{
+    width: 85px;
+    overflow: hidden;
+    padding-top: 5.5px;
+}
+.addthisClassMain
+{
+    width: 42px;
+    padding-top: 5px;
+}
+.smallImageDivMain
+{
+    padding-top: 1px;
+    font-size: 9px !important;
+    margin-right: 4px;
+    overflow: hidden;
+}
+.socialBuuttons div
+{
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
+.stButton .twitter
+{
+    background: url('cssImages/service-icons-sprite.png') no-repeat 0 -620px !important;
+    width: 16px;
+    height: 16px;
+}
+.stButton .facebook
+{
+    background: url('cssImages/service-icons-sprite.png') no-repeat 0 -181px !important;
+    width: 16px;
+    height: 16px;
+}
+.stButton .twitter:hover
+{
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+.stButton .facebook:hover
+{
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+.stButton .chicklets
+{
+    background: url("cssImages/service-icons-sprite.png") no-repeat scroll right top transparent;
+    padding-left: 20px;
+    padding-right: 3px;
+    white-space: nowrap;
+    font-family: Verdana,Helvetica,sans-serif;
+    font-size: 11px;
+    display: inline-block;
+    height: 16px;
+    line-height: 16px;
+}
+
+.stButton
+{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    display: inline-block;
+    cursor: pointer;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 16px;
+    overflow: hidden;
+}
+.expandedPreview
+{
+    width: 37px;
+    float: left;
+    margin-top: 4px;
+    margin-right: 3px;
+}
+form
+{
+    margin: 0px;
+    padding: 0px;
+}
