@@ -1,0 +1,10 @@
+change
+
+https://googlechromeextensions.googlecode.com/svn/GoogleExtensionsV2
+
+to
+
+https://malah-code.github.io/Shared
+
+
+and change permision to be https://malah-code.github.io
