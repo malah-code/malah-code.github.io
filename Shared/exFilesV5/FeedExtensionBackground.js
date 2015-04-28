@@ -138,13 +138,17 @@ function GetDataFromScratch(index) {
                     var imgTagName = 'image';
                     if ($(this).find('Image').length > 0)
                         imgTagName = 'Image';
+                    if ($(this).find('image').length > 0)
+                        imgTagName = 'image';
                     if ($(this).find(imgTagName).length > 0) {
                         //get image from this tag and add it to the discription
                         var addImgTitle = '';
                         var addImglink = '';
                         if ($($(this).find(imgTagName)[0]).find('title').length > 0)
                             addImgTitle = $($(this).find(imgTagName)[0]).find('title').text();
-                        if ($($(this).find(imgTagName)[0]).find('link').length > 0)
+                        if ($($(this).find(imgTagName)[0]).find('url').length > 0)
+                            addImglink = $($(this).find(imgTagName)[0]).find('url').text();
+                        else if ($($(this).find(imgTagName)[0]).find('link').length > 0)
                             addImglink = $($(this).find(imgTagName)[0]).find('link').text();
                         if (addImglink == '') {
                             addImglink = $($(this).find(imgTagName)[0]).text();

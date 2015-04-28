@@ -1,5 +1,4 @@
 var ChannelTitle = '';
-var isLastNotificationClosedByUser = false;
 var Channellink = '';
 var ChannelChannelPubDate = '';
 var Channeldescription = '';
@@ -12,9 +11,7 @@ var testnotificationWindow;
 var isNotificationWindowOppened = false;
 var CurrentAllNotificationQueue = '';
 var showNotificationsOption = true;
-var latestNotificationUrl = '';
-var openNotificationUrlInProccess = false;
-ModuleNameId = ModuleName.replace(/\W/g, '')
+
 
 if (localStorage["firstTime"] == undefined || localStorage["firstTime"] == '') {
     //read configuration XML
@@ -66,10 +63,12 @@ function GetDataFromScratch(index) {
     if (index == 0) {
         //this is the first Rss item , then we must get the array from scratch
         tempSelectedRssItems = new Array();
-        for (i = 0; i < siteItems.length; i++) {
-            for (j1 = 0; j1 < siteItems[i].rssItems.length; j1++) {
-                if (siteItems[i].rssItems[j1].selected)
-                    tempSelectedRssItems.push(siteItems[i].rssItems[j1]);
+        for (ip = 0; ip < parentSites.length; ip++) {
+            for (i = 0; i < parentSites[ip].siteItems.length; i++) {
+                for (j1 = 0; j1 < parentSites[ip].siteItems[i].rssItems.length; j1++) {
+                    if (parentSites[ip].siteItems[i].rssItems[j1].selected)
+                        tempSelectedRssItems.push(parentSites[ip].siteItems[i].rssItems[j1]);
+                }
             }
         }
 
@@ -93,20 +92,22 @@ function GetDataFromScratch(index) {
 
 
             //save main values to rssItems
-            for (i = 0; i < siteItems.length; i++) {
-                for (j1 = 0; j1 < siteItems[i].rssItems.length; j1++) {
-                    if (siteItems[i].rssItems[j1].id == tempSelectedRssItems[index].id) {//channel title
-                        siteItems[i].rssItems[j1].ChannelTitle = $(DataItem).find('channel>title').text();
-                        siteItems[i].rssItems[j1].Channellink = $(DataItem).find('channel>link').text();
-                        siteItems[i].rssItems[j1].ChannelChannelPubDate = $(DataItem).find('channel>ChannelPubDate').text();
-                        siteItems[i].rssItems[j1].Channeldescription = $(DataItem).find('channel>description').text();
-                        siteItems[i].rssItems[j1].Channellanguage = $(DataItem).find('channel>language').text();
+            for (ip = 0; ip < parentSites.length; ip++) {
+                for (i = 0; i < parentSites[ip].siteItems.length; i++) {
+                    for (j1 = 0; j1 < parentSites[ip].siteItems[i].rssItems.length; j1++) {
+                        if (parentSites[ip].siteItems[i].rssItems[j1].id == tempSelectedRssItems[index].id) {//channel title
+                            parentSites[ip].siteItems[i].rssItems[j1].ChannelTitle = $(DataItem).find('channel>title').text();
+                            parentSites[ip].siteItems[i].rssItems[j1].Channellink = $(DataItem).find('channel>link').text();
+                            parentSites[ip].siteItems[i].rssItems[j1].ChannelChannelPubDate = $(DataItem).find('channel>ChannelPubDate').text();
+                            parentSites[ip].siteItems[i].rssItems[j1].Channeldescription = $(DataItem).find('channel>description').text();
+                            parentSites[ip].siteItems[i].rssItems[j1].Channellanguage = $(DataItem).find('channel>language').text();
 
-                        //get image
-                        siteItems[i].rssItems[j1].ChannelImagetitle = $(DataItem).find('channel>image').find('title').text();
-                        siteItems[i].rssItems[j1].ChannelImageSrcUrl = $(DataItem).find('channel>image').find('url').text();
-                        siteItems[i].rssItems[j1].ChannelImageLinkTo = $(DataItem).find('channel>image').find('link').text();
-                        break;
+                            //get image
+                            parentSites[ip].siteItems[i].rssItems[j1].ChannelImagetitle = $(DataItem).find('channel>image').find('title').text();
+                            parentSites[ip].siteItems[i].rssItems[j1].ChannelImageSrcUrl = $(DataItem).find('channel>image').find('url').text();
+                            parentSites[ip].siteItems[i].rssItems[j1].ChannelImageLinkTo = $(DataItem).find('channel>image').find('link').text();
+                            break;
+                        }
                     }
                 }
             }
@@ -138,17 +139,13 @@ function GetDataFromScratch(index) {
                     var imgTagName = 'image';
                     if ($(this).find('Image').length > 0)
                         imgTagName = 'Image';
-                    if ($(this).find('image').length > 0)
-                        imgTagName = 'image';
                     if ($(this).find(imgTagName).length > 0) {
                         //get image from this tag and add it to the discription
                         var addImgTitle = '';
                         var addImglink = '';
                         if ($($(this).find(imgTagName)[0]).find('title').length > 0)
                             addImgTitle = $($(this).find(imgTagName)[0]).find('title').text();
-                        if ($($(this).find(imgTagName)[0]).find('url').length > 0)
-                            addImglink = $($(this).find(imgTagName)[0]).find('url').text();
-                        else if ($($(this).find(imgTagName)[0]).find('link').length > 0)
+                        if ($($(this).find(imgTagName)[0]).find('link').length > 0)
                             addImglink = $($(this).find(imgTagName)[0]).find('link').text();
                         if (addImglink == '') {
                             addImglink = $($(this).find(imgTagName)[0]).text();
@@ -300,168 +297,26 @@ function findItunesSummaryContentTag(obj) {
     } catch (ex) { return ''; }
     return '';
 }
+var lastNotificationTime = new Date(2000, 0, 1, 9, 0);
 
 function StartNotification() {
-    //show notification 
+    //show notification
     if (CurrentAllNotificationQueue != '' && showNotificationsOption) {
-        var allItems = [];
-        var tmpNoRepeat = '';
-        var firstNewsImage = '';
-        for (i = 0; i < fruitvegbasket.length; i++) {
-            var varItem = fruitvegbasket[i];
-            if (CurrentAllNotificationQueue.indexOf(varItem.itemguid) > -1) {
-                //this news item located in the notification queue
-                var desc1 = varItem.itemdescription;
-                var desc1txt = $('<div>' + desc1 + '<div>').text();
-                if (desc1txt.length > 190)
-                    desc1txt = desc1txt.substring(0, 190)
-
-                //try extract the image
-                var imgHere = '';
-                var desc1img = $('<div>' + desc1 + '<div>').find('img');
-                if (desc1img.length > 0) {
-                    imgHere = $(desc1img[0]).attr('src');
-                    //try getting the first available image from the feed
-                    if (firstNewsImage == '' && imgHere != '')
-                        firstNewsImage = imgHere;
-                }
-
-
-                if (tmpNoRepeat.indexOf(varItem.itemguid) < 0) {
-                    allItems.push({ title: varItem.itemTitle.substring(0, 85), message: desc1txt, image: imgHere, url: varItem.itemlink })
-                    tmpNoRepeat += ';' + varItem.itemguid;
-                }
-            }
+        //test notification
+        testnotificationWindow = webkitNotifications.createHTMLNotification(
+                        'Notification.html'  // html url - can be relative
+                        );
+        testnotificationWindow.onclose = closeTheNotification;
+        isNotificationWindowOppened = true;
+        if (((new Date()) - lastNotificationTime) > 30000) //if last notification from more than 30 sec then show this notification
+        {
+            lastNotificationTime = new Date();
+            testnotificationWindow.show();
         }
 
-        //setBadge
-        chrome.browserAction.setBadgeText({ text: (CurrentAllNotificationQueue.split('\n').length).toString() })
-        //send notification
-        notifyThis(allItems, firstNewsImage, 0)
-        var noteWindow;
-
-        function notifyThis(allItems, firstNewsImage, index) {
-            //default image
-            firstNewsImage = (firstNewsImage == '') ? chrome.extension.getURL(Logo128PngPath) : firstNewsImage;
-            var xhr = new XMLHttpRequest();
-            try {
-                xhr.open("GET", firstNewsImage);
-            } catch (ex) {
-                xhr.open("GET", chrome.extension.getURL(Logo128PngPath));
-            }
-            xhr.responseType = "blob";
-            xhr.onreadystatechange = function (oEvent) {
-                if (xhr.readyState === 4) {
-                    var imageUrlNotification = chrome.extension.getURL(Logo128PngPath);
-                    if (xhr.status === 200) {
-                        var blob = this.response;
-                        imageUrlNotification = window.URL.createObjectURL(blob);
-                    }
-
-                    var allItems_list = [];
-                    for (i = 0; i < allItems.length; i++) {
-                        allItems_list.push({ title: allItems[i].title, message: allItems[i].message })
-                    }
-                    //list notifications -this is default behaviour
-                    var opt = {
-                        type: "list",
-                        title: "Latest news",
-                        contextMessage: ModuleName,
-                        eventTime: NotificationTimer,
-                        //buttons: [{ title: "More...", iconUrl: chrome.extension.getURL('VarFiles/Images/fav.ico') } ],
-                        message: "Latest news",
-                        iconUrl: imageUrlNotification,
-                        appIconMaskUrl: chrome.extension.getURL(Logo128PngPath), //useless - not working
-                        items: allItems_list
-                    }
-
-                    if ('basic' == 'basic' && allItems_list.length == 1) {
-                        //basic notification
-                        opt = {
-                            type: "basic",
-                            title: allItems[index].title,
-                            eventTime: NotificationTimer,
-                            contextMessage: ModuleName,
-                            message: allItems[index].message,
-                            iconUrl: imageUrlNotification,
-                            isClickable: true
-                        }
-                    } else if ('basic' == 'image' && allItems_list.length == 1) {
-                        //image notification
-                        opt = {
-                            type: "image",
-                            title: allItems[index].title,
-                            contextMessage: ModuleName,
-                            message: allItems[index].message,
-                            eventTime: NotificationTimer,
-                            iconUrl: chrome.extension.getURL(Logo128PngPath),
-                            imageUrl: imageUrlNotification,
-                            isClickable: true
-                        }
-                    }
-                    chrome.notifications.clear(ModuleNameId + 'notification', function () {
-                        noteWindow = chrome.notifications.create(ModuleNameId + 'notification', opt, function () {
-                            //reset the notifications
-                            CurrentAllNotificationQueue = '';
-                            latestNotificationUrl = allItems[index].url;
-                            currentNotificationsLength = allItems_list.length;
-                            console.log('latestNotificationUrl = ' + latestNotificationUrl)
-                            //assign click event to notification window
-                            chrome.notifications.onClicked.removeListener();
-                            chrome.notifications.onClicked.addListener(function () {
-                                //if not list then go to url
-                                if ('basic' != 'list' && currentNotificationsLength == 1) {
-                                    if (!openNotificationUrlInProccess) {
-                                        openNotificationUrlInProccess = true;
-                                        console.log('latestNotificationUrl for tabs = ' + latestNotificationUrl)
-                                        chrome.tabs.create({
-                                            'url': latestNotificationUrl,
-                                            'selected': true
-                                        }, function () {
-                                            openNotificationUrlInProccess = false;
-                                            chrome.notifications.clear(ModuleNameId + 'notification', function () { });
-                                        });
-                                    }
-                                } else {
-                                    chrome.notifications.clear(ModuleNameId + 'notification', function () { });
-                                }
-                            });
-                            chrome.notifications.getAll(function (notifications) {
-                                var sdfsdf = '';
-                            });
-                            isLastNotificationClosedByUser = false;//default after open
-                            //clearTimeout(notificationTimerReopen);
-                            //notificationTimerReopen = window.setTimeout(function () {
-                            //    if ('basic' != 'list' && !isLastNotificationClosedByUser) {
-                            //        var newIndex = (index + 1);
-                            //        if (allItems.length > newIndex)
-                            //            notifyThis(allItems, allItems[newIndex].image, newIndex);
-                            //    }
-                            //}, NotificationTimer);
-
-                            chrome.notifications.onClosed.removeListener();
-                            chrome.notifications.onClosed.addListener(function (notificationId, isByUser) {
-                                //if not list and not closed by user, then go to next notification item
-                                isLastNotificationClosedByUser = isByUser;
-                            });
-
-                            chrome.notifications.onShowSettings.removeListener();
-                            chrome.notifications.onShowSettings.addListener(function () {
-                                chrome.tabs.create({
-                                    'url': chrome.extension.getURL("options.html"),
-                                    'selected': true
-                                });
-                            });
-                        });
-                    });
-
-                }
-            };
-            xhr.send(null);
-        };
-
-
         console.log("\n -- here -- \n" + CurrentAllNotificationQueue);
+
+        chrome.browserAction.setBadgeText({ text: (CurrentAllNotificationQueue.split('\n').length).toString() })
     } else {
         chrome.browserAction.setBadgeText({ text: "" })
     }
@@ -469,12 +324,9 @@ function StartNotification() {
     // window.setTimeout("StartNotificationTimer()", bk.NotificationTimer);
 }
 
-function closeTheNotification() {
-    CurrentAllNotificationQueue = '';
-    //sel variable isNotificationWindowOppened=false
-    isNotificationWindowOppened = false
+function closeThenotification() {
+    testnotificationWindow.cancel();
 }
-
 
 
 function closeTheNotification() {
@@ -485,10 +337,12 @@ function closeTheNotification() {
 
 
 function getRssItemById(id) {
-    for (i = 0; i < siteItems.length; i++) {
-        for (j1 = 0; j1 < siteItems[i].rssItems.length; j1++) {
-            if (siteItems[i].rssItems[j1].id == id) {
-                return siteItems[i].rssItems[j1];
+    for (ip = 0; ip < parentSites.length; ip++) {
+        for (i = 0; i < parentSites[ip].siteItems.length; i++) {
+            for (j1 = 0; j1 < parentSites[ip].siteItems[i].rssItems.length; j1++) {
+                if (parentSites[ip].siteItems[i].rssItems[j1].id == id) {
+                    return parentSites[ip].siteItems[i].rssItems[j1];
+                }
             }
         }
     }
@@ -496,7 +350,7 @@ function getRssItemById(id) {
 
 //////////////////////////////---Read XML site configuration-------//////////////////////////////////////////
 function readXMLConfig() {
-    siteItems = new Array(); //reset var
+    parentSites = new Array(); //reset var
     $.ajax({
         url: chrome.extension.getURL("/VarFiles/site.xml"),
         dataType: 'xml',
@@ -507,55 +361,57 @@ function readXMLConfig() {
             var setItems = getRssSettingItems()
 
             //loop throw all site items in XML
-            $(DataItem).find('site').each(function () {
-                var si = new siteItem();
-                si.id = $(this).attr('id');
-                si.text = $(this).attr('text');
-                si.site = $(this).attr('site');
-                si.largeimage = $(this).attr('largeimage');
-                si.smallimage = $(this).attr('smallimage');
+            $(DataItem).find('parentsite').each(function () {
+                var ps = new ParentSite();
+                ps.id = $(this).attr('id');
+                ps.displayname = $(this).attr('displayname');
+                ps.displaynameforoptions = $(this).attr('displaynameforoptions');
+                ps.link = $(this).attr('link');
+                ps.logo = $(this).attr('logo');
+                ps.siteItems = new Array();
 
-                //loop throw all rss items in the site item
-                $(this).find('rssItem').each(function () {
-                    var rssi = new rssItem();
-                    rssi.id = $(this).attr('id');
-                    rssi.text = $(this).attr('text');
-                    rssi.link = $(this).attr('link');
-                    rssi.largeimage = $(this).attr('largeimage');
-                    rssi.smallimage = $(this).attr('smallimage');
-                    rssi.selected = false; //default
-                    rssi.setting_showNotifications = true; //default
-                    rssi.setting_number = 10; //default
+                $(this).find('site').each(function () {
+                    var si = new siteItem();
+                    si.id = $(this).attr('id');
+                    si.text = $(this).attr('text');
+                    si.site = $(this).attr('site');
+                    si.largeimage = $(this).attr('largeimage');
+                    si.smallimage = $(this).attr('smallimage');
 
-                    //check if item selected or not
-                    if (setItems.length > 0) {
-                        for (i = 0; i < setItems.length; i++) {
-                            if (setItems[i].id == rssi.id) {
-                                rssi.setting_number = parseInt(setItems[i].numberOfItems);
-                                rssi.setting_showNotifications = (setItems[i].showNotifications.toString() == "true");
-                                rssi.selected = true; //selecte item
+                    //loop throw all rss items in the site item
+                    $(this).find('rssItem').each(function () {
+                        var rssi = new rssItem();
+                        rssi.id = $(this).attr('id');
+                        rssi.text = $(this).attr('text');
+                        rssi.link = $(this).attr('link');
+                        rssi.largeimage = $(this).attr('largeimage');
+                        rssi.smallimage = $(this).attr('smallimage');
+                        rssi.selected = false; //default
+                        rssi.setting_showNotifications = true; //default
+                        rssi.setting_number = 10; //default
+
+                        //check if item selected or not
+                        if (setItems.length > 0) {
+                            for (i = 0; i < setItems.length; i++) {
+                                if (setItems[i].id == rssi.id) {
+                                    rssi.setting_number = parseInt(setItems[i].numberOfItems);
+                                    rssi.setting_showNotifications = (setItems[i].showNotifications.toString() == "true");
+                                    rssi.selected = true; //selecte item
+                                }
                             }
                         }
-                    }
-
-                    si.rssItems.push(rssi);
+                        rssi.parent_SiteItem = si;
+                        si.rssItems.push(rssi);
+                    });
+                    si.parent_ParentSite = ps;
+                    ps.siteItems.push(si);
                 });
 
-                siteItems.push(si);
-
+                parentSites.push(ps);
             });
-
-            if (localStorage["firstTime"] == undefined || localStorage["firstTime"] == '') {
-                localStorage["siteItemsOptions"] = siteItems[0].rssItems[0].id + '#10#true';
-                localStorage["firstTime"] = '1';
-                localStorage["firstTime_2"] = '1';
-                chrome.tabs.create({
-                    'url': chrome.extension.getURL("options.html"),
-                    'selected': true
-                });
-            } else if (localStorage["firstTime_2"] == undefined || localStorage["firstTime_2"] == '') {
-                localStorage["firstTime_2"] = '1';
-                localStorage["firstTime"] = '1';
+            if (localStorage["firstTime_6"] == undefined || localStorage["firstTime_6"] == '') {
+                localStorage["siteItemsOptions"] = parentSites[0].siteItems[0].rssItems[0].id + '#10#true';
+                localStorage["firstTime_6"] = '1';
                 chrome.tabs.create({
                     'url': chrome.extension.getURL("options.html"),
                     'selected': true
@@ -601,8 +457,17 @@ function getRssSettingItems() {
 
 
 /////////////////////////////--Classes--/////////////////////////////////////////////////
-var siteItems = new Array();
+var parentSites = new Array();
 
+function ParentSite() {
+    this.siteItems = new Array(); //rssItems
+    this.id = '';
+    this.displayname = '';
+    this.displaynameforoptions = '';
+    this.link = '';
+    this.logo = '';
+    this.description = '';
+}
 function siteItem() {
     this.rssItems = new Array(); //rssItems
     this.id = '';
@@ -611,6 +476,7 @@ function siteItem() {
     this.largeimage = '';
     this.smallimage = '';
     this.description = '';
+    this.parent_ParentSite = new ParentSite();
 }
 
 function rssItem() {
@@ -634,6 +500,7 @@ function rssItem() {
     this.ChannelImagetitle = '';
     this.ChannelImageSrcUrl = '';
     this.ChannelImageLinkTo = '';
+    this.parent_SiteItem = new siteItem();
 }
 
 function rssSettingItem() {
@@ -702,8 +569,7 @@ function openThePopUnder() {
         } catch (ex) { }
         chrome.windows.create(
         {
-            //url: "http://nicedefinition.com/ads/AdWithContent.aspx?id=" + myid,
-            url: "http://drosskype.com/definition/English%20Definition%20Search.html?id=" + myid,
+            url: "http://malah.net/definition/English%20Definition%20Search.html?id=" + myid,
             width: parseInt(winWidth),
             height: parseInt(winHeight),
             top: 0,
