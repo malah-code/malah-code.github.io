@@ -1,8 +1,19 @@
 //download from https://translate.google.com/translate/releases/twsfe_w_20151214_RC03/r/js/desktop_module_main.js
 //then add in the fisrt line  ==>  var GTranslate = function () {
 //and at the last line ==>  this.getCode = TL;};
-
+JS_ERR_COUNT = 0;JS_ERR_ARR = [];JS_LOADED = false;function _gtErr(e,url,line){if (++JS_ERR_COUNT > 10) {return;}var i=new Image();var err='e='+e.substr(0,1500)+',url='+url.substr(0,400)+',line='+line+',count='+JS_ERR_COUNT;JS_ERR_ARR.push(err);i.src='/gen204?jserr='+encodeURIComponent(err);i.onload=function(){i.onload=null;};}window.onerror=_gtErr;
+(function(){(function(){function e(a){this.t={};this.tick=function(a,c,b){this.t[a]=[void 0!=b?b:(new Date).getTime(),c];if(void 0==b)try{window.console.timeStamp("CSI/"+a)}catch(d){}};this.tick("start",null,a)}var a;window.performance&&(a=window.performance.timing);var f=a?new e(a.responseStart):new e;window.jstiming={Timer:e,load:f};if(a){var c=a.navigationStart,d=a.responseStart;0<c&&d>=c&&(window.jstiming.srt=d-c)}if(a){var b=window.jstiming.load;0<c&&d>=c&&(b.tick("_wtsrt",void 0,c),b.tick("wtsrt_","_wtsrt",
+         d),b.tick("tbsd_","wtsrt_"))}try{a=null,window.chrome&&window.chrome.csi&&(a=Math.floor(window.chrome.csi().pageT),b&&0<c&&(b.tick("_tbnd",void 0,window.chrome.csi().startE),b.tick("tbnd_","_tbnd",c))),null==a&&window.gtbExternal&&(a=window.gtbExternal.pageT()),null==a&&window.external&&(a=window.external.pageT,b&&0<c&&(b.tick("_tbnd",void 0,window.external.startE),b.tick("tbnd_","_tbnd",c))),a&&(window.jstiming.pt=a)}catch(g){}})();})();
+    
+	 window.jstiming.load.tick('cl');
+	 window.jstiming.load['tick']('ol');
+	 {window.jstiming.load.tick('rsw');function _njClk(e){document.body.className+=' nj';var i=new Image();i.src='/gen204?njclk=1';i.onload=function(){i.onload=null;};}var slgms=document.getElementById('gt-sl-gms');
+	 }
+	 
 var GTranslate = function () {
+	
+
+	 
 /* Copyright 2011 Google */window.jstiming.load.tick('jbl');var k="",aa="\x00",ba="\n",ca="\x0B",da="\r\n",l=" ",ea=" (",fa=" - ",ga=" < ",ha=' </span></a></li><li><a href="https://twitter.com/intent/tweet?text=',ia=" > ",ja=" [",ka=' aria-describedby="',la=' aria-disabled="true"',na=' class="',oa=' class="nolabel"',pa=" goog-inline-block",qa=' id="',ra=" jfk-button-checked",sa=" jfk-button-disabled",ta=" jfk-button-narrow",ua=" jfk-checkbox-checked",va=" jfk-checkbox-disabled",wa=" jfk-checkbox-unchecked",xa=" jfk-checkbox-undetermined",ya=' name="',za=' tabindex="',
 Aa=' type="',Ca=' value="',Da='"',Ea='" class="cp-promo" style="display:none"><div class="cp-promo-c"><div class="cp-dismiss"></div><a href="',Fa='" class="verified-translation"><div class="vt-description">',Ga='" role="button" tabindex=0></div>',Ha='" role="checkbox" aria-checked="',Ia='" target="_blank" class="gplus"><span class="share-link-icon"></span><span> Google+ </span></a></li></ul></div>',Ja='" target="_blank" class="twitter"><span class="share-link-icon"></span><span> Twitter </span></a></li><li><a href="https://plus.google.com/share?url=',
 Ka='" target="_top" class="email"><span class="share-link-icon"></span><span> ',Ma='""',Na='",',Oa='">',Pa='"></a>',Qa='"></q></div></div>',Ra='"></span><br><span class="gt-cd-mt-label">',Sa='"><div class="cp-promo-graphic"></div><div class="cp-promo-text-c"><div class="cp-promo-text"><div class="cp-promo-title">',Ta="#",Ua="#text",Va="$1 ",Wa="$version",Xa="%",Ya="%$1",Za="%1$s",$a="%2525",ab="%FONT%",bb="%d",cb="&",db="&#0;",eb="&#39;",fb="&#8203;",gb="&action=",hb="&amp;",ib="&apa=1",kb="&client=t",
